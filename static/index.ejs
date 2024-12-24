@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth-compat.js"></script>  
+  <title>Google Authentication</title>
+</head>
+<body>
+  <h1>Google Authentication Test</h1>
+  <button id="googleSignIn">Sign in with Google</button>
+
+  <script>
+    // const firebaseConfig = {
+    //     apiKey: "AIzaSyCfQBc0B6iC7XGuUCXpnn7hSq-Ks-SUYCc",
+    //     authDomain: "test-auth-f5221.firebaseapp.com",
+    //     projectId: "test-auth-f5221",
+    //     storageBucket: "test-auth-f5221.firebasestorage.app",
+    //     messagingSenderId: "673998141837",
+    //     appId: "1:673998141837:web:a089d0947f917e78f025c4",
+    //     measurementId: "G-JGCPEHCSCV"
+    // };
+
+    // Initialize Firebase
+    // const app = firebase.initializeApp(firebaseConfig);
+    // const auth = firebase.getAuth(app);
+    // import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    // import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Firebase Auth
+    const auth = firebase.auth();
+
+    document.getElementById("googleSignIn").onclick = async () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    try {
+        const result = await auth.signInWithPopup(provider);
+        const idToken = await result.user.getIdToken();
+        console.log("ID Token:", idToken);
+    } catch (error) {
+        console.error("Authentication Error:", error);
+    }
+    };
+  </script>
+</body>
+</html>
